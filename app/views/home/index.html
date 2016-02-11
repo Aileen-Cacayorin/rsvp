@@ -1,9 +1,43 @@
-<div class="landing-buttons">
-  <div class="sign-up-landing">
-    <%= link_to "Sign Up", new_user_registration_path %>
+<body>
+<div class="landing-page">
+  <div class="container-fluid">
+    <div class="sign-up">
+      <div class="landing-button"><%= link_to "Sign Up", new_user_registration_path %></div>
+    </div>
   </div>
 </div>
-
-<div class="tag-line white">
-  We'll see you there.
-</div>
+  <div>
+    <p id="tag-line">
+      Do More. Plan Less.
+    </p>
+    <p id="landing-text">
+      RSVP makes travel planning with family and friends less painful.
+    </p>
+  </div>
+  <div class="row text-center row-padding first-row">
+    <div class="col-md-6">
+      <h2>Do More</h2>
+      <p class="landing-text-bottom">
+        RSVP lets you find awesome local activites to add to your itinerary during your travel.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <%= image_tag("man-in-town", width: '550', height: '350', class: "img-rounded img-responsive")%>
+    </div>
+  </div>
+  <div class="row text-center row-padding second-row">
+    <div class="col-md-6">
+      <%= image_tag("smartphone-desk", width: '550', height: '350', class: "img-rounded img-responsive")%>
+    </div>
+    <div class="col-md-6">
+      <h2>Plan Less</h2>
+      <p class="landing-text-bottom">
+        RSVP lets you coordinate hotel bookings, see flight plans and create a shareable itinerary.
+        No more lugging around folders of information.  Find all of this information in one convenient place online.
+      </p>
+    </div>
+  </div>
+  <footer class="main-footer">
+    <p>&copy All rights reserved</p>
+  </footer>
+</body>

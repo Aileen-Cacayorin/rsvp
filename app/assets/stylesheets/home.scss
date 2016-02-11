@@ -1,3 +1,125 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.landing-page {
+  background-image:
+  url('stock.jpg');
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+  height: 570px;
+  position: relative;
+}
+
+.sign-up {
+  position: absolute;
+  bottom: 48%;
+  left: 25%;
+}
+
+.landing-button {
+  border-radius: 5px;
+  border-width: 5px;
+}
+
+.landing-button a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 2px;
+  border: 1px solid #fff;
+  padding: 20px 60px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border-width: 2px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.landing-button :hover {
+  background-color:white;
+  color:black;
+}
+
+#tag-line {
+  text-align:center;
+  font-size:36px;
+  padding-top:5px;
+  text-transform:uppercase;
+  color:#021B28;
+  font-weight:800;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#landing-text {
+  text-align: center;
+  font-size:24px;
+  color: #021B28;
+  font-family: 'Open Sans', sans-serif;
+  font-weight:400;
+}
+
+.row-padding {
+  padding: 40px;
+}
+
+.first-row {
+  margin: 60px;
+  border-top: 1px solid #dfe2e6;
+  border-bottom: 1px solid #dfe2e6;
+}
+
+.second-row {
+  margin: 60px;
+  border-bottom: 1px solid #dfe2e6;
+}
+
+.landing-text-bottom {
+  text-align: justify;
+  font-size:16px;
+  padding-top: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight:300;
+  color: #011B23;
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #011B23;
+}
+
+.main-footer {
+  height:50px;
+  padding:15px;
+  margin:0;
+  color:#021B28;
+  text-align: center;
+}
+
+.img-responsive{
+  display: inline-block;
+}
+
+@media (max-width: 480px) {
+  .sign-up {
+    bottom: 10%;
+    left: 18%;
+  }
+    #landing-text {
+        text-align: justify;
+        margin: 20px 20px 0px 20px;
+        font-size: 20px;
+    }
+
+    #tag-line {
+      margin:0 60px;
+    }
+  }
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .sign-up {
+    bottom: 48%;
+    left: 17%;
+  }
+}

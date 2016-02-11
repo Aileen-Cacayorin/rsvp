@@ -1,0 +1,101 @@
+.nav-bar,
+.landing-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  background-color:#FFF;
+  border: 1px solid #ddd;
+}
+
+.landing-tabs {
+  list-style:none;
+  padding-right: 3.5em;
+}
+
+.landing-tabs li {
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.logo {
+  font-family: stackyard;
+  font-size:4em;
+  align-self:center;
+  color: #021B28;
+}
+
+.logo:hover, :focus, :active, :visited {
+  text-decoration:none;
+  color: #021C28;
+}
+
+.landing-tabs a {
+  display:block;
+  font-size:1.125em;
+  font-weight: 300;
+  text-align: center;
+  padding: .4em;
+  border-bottom: 1px solid #ebecec;
+  color: #021B28;
+}
+
+.landing-tabs a:hover, a:focus{
+  text-decoration: none;
+  background-color:#358f81;
+  border-radius: 5px;
+  color: white;
+}
+
+a.logo:focus {
+  line-height:0;
+  outline-width:0;
+  outline-color:transparent;
+  text-decoration:none;
+  color: #021C28;
+}
+
+button.btn.btn-custom a {
+  padding: 0;
+  border: none;
+  color:white;
+}
+
+button.btn.btn-custom {
+  background-color:#037362;
+}
+
+button.btn.btn-custom:hover {
+  background-color:#358f81;
+}
+
+button.btn.btn-custom:hover {
+    background-color:#358f81;
+}
+
+
+@media (min-width: 769px) {
+  .nav-bar{
+    flex-direction: row;
+    justify-content: space-between;
+    height:60px;
+  }
+  .logo {
+    font-size:5.5em;
+  }
+
+  .landing-tabs{
+    flex-direction: row;
+    margin-top: 15px;
+  }
+
+  .landing-tabs a {
+    border-bottom-color:transparent;
+  }
+
+  .logo {
+    margin-left: 30px;
+  }
+
+}

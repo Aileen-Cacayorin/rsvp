@@ -1,6 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'events';
+@import "nav";
+@import "home";
 
 @font-face {
     font-family: gravity;
@@ -46,48 +48,6 @@
   margin-top: 50px;
 }
 
-#sign-up a:hover {
-  color: #black;
-  -o-transition:.5s;
-   -ms-transition:.5s;
-   -moz-transition:.5s;
-   -webkit-transition:.5s;
-   transition:.5s;
-}
-
-.landing-buttons {
-  font-family: heckyeah;
-  color: white;
-  position: absolute;
-  left: 27%;
-  top: 40%;
-  display: inline-block;
-  font-size: 300%;
-  box-shadow: 5px 5px 5px #404040;
-}
-
-.tag-line {
-  position: absolute;
-  right: 300px;
-  bottom: 20%;
-  font-size: 3em
-}
-
-.sign-up-landing a {
-  text-decoration: none;
-  color: #d9d9d9;
-  padding: 10px 30px;
-  background-color: #ff9933;
-}
-
-.sign-up-landing a:hover {
-  background-color: #cc7a00;
-  -o-transition:.5s;
-   -ms-transition:.5s;
-   -moz-transition:.5s;
-   -webkit-transition:.5s;
-   transition:.5s;
-}
 
 .login-middle a {
   text-decoration: none;
@@ -104,18 +64,6 @@ html, body {
   height: 570px;
 }
 
-.landing-page {
-  background-image:
-    linear-gradient(
-    rgba(0, 0, 0, 0.25),
-    rgba(0, 0, 0, 0.25)
-    ),
-    url('stock.jpg');
-  background-size:     cover;
-  background-repeat:   no-repeat;
-  background-position: center center;
-  height: 750px;
-}
 
 .panel-heading {
   font-size: 2.5em;
@@ -180,12 +128,6 @@ html, body {
 .add-event {
   font-size: .5em;
   margin-top: 10px;
-}
-
-nav.navbar.navbar-default {
-  height:60px;
-  padding-top: 5px;
-  background-color: white;
 }
 
 #add-button {
