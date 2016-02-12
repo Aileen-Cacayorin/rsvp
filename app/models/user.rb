@@ -30,4 +30,12 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def is_event_planner(event)
+    if Event.where(id: event.id, user_id: self.id).count > 0
+      return true
+    else
+      return false
+    end
+  end
 end

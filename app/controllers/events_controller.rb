@@ -93,7 +93,7 @@ class EventsController < ApplicationController
 
   def current_user_is_guest
     @event = Event.find(params[:id])
-    unless current_user.is_guest(@event)
+    unless current_user.is_guest(@event) || current_user.is_event_planner(@event)
       flash[:error] = "You may only view your events you are attending or planning."
       redirect_to root_path
     end
