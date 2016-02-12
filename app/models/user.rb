@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+ # creates list of events a user is a guest of
   def attending
     attending = []
     user_id = self.id
@@ -23,6 +25,7 @@ class User < ActiveRecord::Base
     return attending
   end
 
+  # checks if a user is a guest of an event
   def is_guest(event)
     if Guest.where(user_id: self.id, event_id: event.id).count > 0
       return true
@@ -31,6 +34,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  #checks if a user owns the event
   def is_event_planner(event)
     if Event.where(id: event.id, user_id: self.id).count > 0
       return true
