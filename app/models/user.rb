@@ -22,4 +22,12 @@ class User < ActiveRecord::Base
     end
     return attending
   end
+
+  def is_guest(event)
+    if Guest.where(user_id: self.id, event_id: event.id).count > 0
+      return true
+    else
+      return false
+    end
+  end
 end
