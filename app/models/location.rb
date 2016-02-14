@@ -19,6 +19,8 @@ class Location < ActiveRecord::Base
     "#{street}, #{city}, #{state}"
   end
 
+
+  #gets expedia hotel id
   def get_hotelid
     self.city = self.city.strip()
     self.state = self.state.strip()
@@ -27,6 +29,7 @@ class Location < ActiveRecord::Base
     self.hotelid = response["result"]["hotels"].first()["id"]
   end
 
+  #determines is a location already exists for an event based on hotelid
   def event_location_exists(event)
     self.get_hotelid()
     if Location.where(:event_id => event.id, :hotelid => self.hotelid).count > 0
@@ -36,8 +39,10 @@ class Location < ActiveRecord::Base
     end
   end
 
-  def get_existing_location(event, location)
+  #returns existing location for event
+  def get_existing_location(event)
     self.get_hotelid()
     return Location.where(:event_id => event.id, :hotelid => self.hotelid).first
+  end
 
 end
