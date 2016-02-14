@@ -1,6 +1,5 @@
 class Location < ActiveRecord::Base
-  before_create :get_id
-
+  before_create :get_hotelid
 
   attr_accessor :full_address
   belongs_to :event
@@ -20,11 +19,25 @@ class Location < ActiveRecord::Base
     "#{street}, #{city}, #{state}"
   end
 
-  def get_id
+  def get_hotelid
     self.city = self.city.strip()
     self.state = self.state.strip()
     query = self.name.split(' ').join('-') + "-" + self.city + '-' + self.state
     response = HTTParty.get("http://terminal2.expedia.com/x/nlp/results?q=" + query + "&apikey=" + "3FD8jYfm0LbZsxOcVZ66f89vByNPKXQB")
     self.hotelid = response["result"]["hotels"].first()["id"]
   end
+
+  def event_location_exists(event)
+    self.get_hotelid()
+    if Location.where(:event_id => event.id, :hotelid => self.hotelid).count > 0
+      return true
+    else
+      return false
+    end
+  end
+
+  def get_existing_location(event, location)
+    self.get_hotelid()
+    return Location.where(:event_id => event.id, :hotelid => self.hotelid).first
+
 end

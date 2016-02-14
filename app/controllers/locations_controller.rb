@@ -19,20 +19,30 @@ class LocationsController < ApplicationController
     @street = @address[0]
     @city = @address[1]
     @state = @address[2]
-    @location = Location.create(:name => @name, :street => @street, :city => @city, :state => @state, :event_id => params[:event_id].to_i)
-
+    @location = Location.new(:name => @name, :street => @street, :city => @city, :state => @state, :event_id => params[:event_id].to_i)
+    binding.pry
 
     if @user == @event.user
-      redirect_to user_event_path(@user, @event)
-    else
+      @location.save
+
+    elsif @location.event_location_exists(@event)
+      binding.pry
+      @existing_location = @location.get_existing_location(@event)
       @start_date = @event.start_date
       @end_date = @event.end_date
       @guest = @event.find_guest(@user).id
+      @room = Room.create(:start_date => @start_date, :end_date => @end_date, :location_id => @existin_location.id, :event_id => @event.id, :guest_id => @guest)
+      @room.save
+    else
+      @location.save
       binding.pry
+      @start_date = @event.start_date
+      @end_date = @event.end_date
+      @guest = @event.find_guest(@user).id
       @room = Room.create(:start_date => @start_date, :end_date => @end_date, :location_id => @location.id, :event_id => @event.id, :guest_id => @guest)
       @room.save
-      redirect_to user_event_path(@user, @event)
     end
+    redirect_to user_event_path(@user, @event)
   end
 
   def show
