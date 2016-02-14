@@ -21,8 +21,7 @@ class LocationsController < ApplicationController
     @state = @address[2]
     @location = Location.new(:name => @name, :street => @street, :city => @city, :state => @state, :event_id => params[:event_id].to_i)
 
-    #saves location if this is the main event location. need to fix this for when event owner adds personal travel plans/room
-    if @user == @event.user
+    if @user == @event.user #saves location as main event location if user is event owner.
       @location.save
 
     else

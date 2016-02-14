@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
 
   attr_accessor :full_address
   belongs_to :event
-  has_many :rooms
+  has_many :rooms, , dependent: :destroy
   has_many :guests, through: :rooms
 
   geocoded_by :full_address
