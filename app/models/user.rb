@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { large: "800x600#", medium: "300x200#", thumb: "100x100#" }, default_url: "/assets/images/missing.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  has_many :events
+  has_many :events, dependent: :destroy 
   has_many :guests
 
   validates :first_name, :presence => true
@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+ # creates list of events a user is a guest of
   def attending
     attending = []
     user_id = self.id
@@ -21,5 +23,23 @@ class User < ActiveRecord::Base
       attending.push(event)
     end
     return attending
+  end
+
+  # checks if a user is a guest of an event
+  def is_guest(event)
+    if Guest.where(user_id: self.id, event_id: event.id).count > 0
+      return true
+    else
+      return false
+    end
+  end
+
+  #checks if a user owns the event
+  def is_event_planner(event)
+    if Event.where(id: event.id, user_id: self.id).count > 0
+      return true
+    else
+      return false
+    end
   end
 end
