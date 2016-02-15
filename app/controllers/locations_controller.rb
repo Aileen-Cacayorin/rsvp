@@ -24,13 +24,19 @@ class LocationsController < ApplicationController
     if @user == @event.user
       redirect_to user_event_path(@user, @event)
     else
-      @start_date = @event.start_date
-      @end_date = @event.end_date
       @guest = @event.find_guest(@user).id
-      @room = Room.create(:start_date => @start_date, :end_date => @end_date, :location_id => @location.id, :event_id => @event.id, :guest_id => @guest)
-      @room.save
-      redirect_to user_event_path(@user, @event)
+
+      if @location.event_location_exists(@event)   #if location exists, guest room with location_id is saved
+        @room_location = @location.get_existing_location(@event)
+
+      else #if location does not exist, saves location and adds guest room
+        @location.save
+        @room_location = @location
+      end
+      @room = Room.create(:start_date => @event.start_date, :end_date => @event.end_date, :location_id => @room_location.id, :event_id => @event.id, :guest_id => @guest)
+
     end
+    redirect_to user_event_path(@user, @event)
   end
 
   def show

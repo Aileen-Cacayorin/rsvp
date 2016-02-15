@@ -5,9 +5,9 @@ class Event < ActiveRecord::Base
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 
 
-  has_many :guests
-  has_many :locations
-  has_many :rooms
+  has_many :guests, dependent: :destroy
+  has_many :locations, dependent: :destroy
+  has_many :rooms, dependent: :destroy
   belongs_to :user
 
 

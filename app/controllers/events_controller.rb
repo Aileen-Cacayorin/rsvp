@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :current_user_is_guest, only: [:show]
 
   def index
     @events = current_user.events.all
@@ -88,5 +89,13 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:title, :description, :start_date, :end_date)
+  end
+
+  def current_user_is_guest #checks if a user owns or is a guest of an event before loading. if not, redirects to dashboard
+    @event = Event.find(params[:id])
+    unless current_user.is_guest(@event) || current_user.is_event_planner(@event)
+      flash[:error] = "You may only view your events you are attending or planning."
+      redirect_to root_path
+    end
   end
 end
