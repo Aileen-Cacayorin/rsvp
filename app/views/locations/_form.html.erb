@@ -6,6 +6,10 @@
   <%= hidden_field_tag :address %>
   <%= hidden_field_tag :city %>
   <%= hidden_field_tag :state %>
+  <% if params[:lodging] %>
+    <%= hidden_field_tag :lodging, "true"%>
+  <% end %>
+
   <%= f.submit class: "btn btn-success" %>
 
 <% end %>

@@ -1,7 +1,7 @@
-<% if @user == @event.user %>
-  <h1 class="white">Where is the event happening?</h1>
+<% if params[:lodging] %>
+    <h1 class="white">Where are you staying?</h1>
 <% else %>
-  <h1 class="white">Where are you staying?</h1>
+    <h1 class="white">Where is the event happening?</h1>
 <% end %>
 
 
