@@ -16,6 +16,10 @@ class EventsController < ApplicationController
     if @event.save
       @event.user = @user
       @event.save
+      @guest = Guest.new
+      @guest.event = @event
+      @guest.user = @user
+      @guest.save
       flash[:notice] = "Event successfully created"
       redirect_to new_event_location_path(@event)
     else
