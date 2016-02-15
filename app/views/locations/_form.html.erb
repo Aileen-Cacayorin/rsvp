@@ -1,11 +1,11 @@
 <%= form_for [@event, @location], :id => "search", html: { multipart: true } do |f| %>
   <div class="field form-group">
-    <%= f.label :name, "Venue Name" %>
-    <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    <%= text_field_tag :search, params[:search], class: "form-control input-lg", placeholder: "Enter Location Name", id: "search-text-field" %>
   </div>
-  <div class="field form-group">
-    <%= text_field_tag :search, params[:search], class: "form-control input-lg", placeholder: "Enter Venue Address", id: "search-text-field" %>
-  </div>
+  <%= hidden_field_tag :name %>
+  <%= hidden_field_tag :address %>
+  <%= hidden_field_tag :city %>
+  <%= hidden_field_tag :state %>
   <%= f.submit class: "btn btn-success" %>
 
 <% end %>
@@ -15,14 +15,21 @@
 function autoComplete() {
   var input = document.getElementById('search-text-field');
   var options = {
-          types: ['address'],
+          types: ['establishment'],
           componentRestrictions: {country: 'us'}
         };
   var autocomplete = new google.maps.places.Autocomplete(input, options);
   // When the user selects an address from the dropdown, populate the address
   // fields in the form.
-  autocomplete.addListener('place_changed', autocomplete.getPlace());
-}
+  google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              var street = place.address_components[0].long_name + " " + place.address_components[1].long_name
+              document.getElementById('name').value = place.name;
+              document.getElementById('address').value = street;
+              document.getElementById('city').value = place.address_components[2].long_name;
+              document.getElementById('state').value = place.address_components[3].short_name;
+            });
+  }
 </script>
 
   <script  src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,places&callback=autoComplete"></script>
