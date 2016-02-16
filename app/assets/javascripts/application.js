@@ -34,7 +34,6 @@ function initMap(locations) {
   center: {lat: main_location.latitude, lng: main_location.longitude},
   zoom: 12
   });
-
   var markers = [];
   new_locations.forEach(function(location) {
     var address = [];
