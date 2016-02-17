@@ -14,16 +14,15 @@ class LocationsController < ApplicationController
   def create
     @user = current_user
     @event = Event.find(params[:event_id].to_i)
-    @name = location_params[:name]
-    @address = params[:search].split(",")
-    @street = @address[0]
-    @city = @address[1]
-    @state = @address[2]
+    @name = params[:name]
+    @street = params[:address]
+    @city = params[:city]
+    @state = params[:state]
     @location = Location.new(:name => @name, :street => @street, :city => @city, :state => @state, :event_id => params[:event_id].to_i)
 
-    if @user == @event.user #saves location as main event location if user is event owner.
+    if (@user == @event.user) && (params[:lodging] != "true")
       @location.save
-
+      redirect_to user_event_path(@user, @event)
     else
       @guest = @event.find_guest(@user).id
 
@@ -35,8 +34,9 @@ class LocationsController < ApplicationController
         @room_location = @location
       end
       @room = Room.create(:start_date => @event.start_date, :end_date => @event.end_date, :location_id => @room_location.id, :event_id => @event.id, :guest_id => @guest)
+      redirect_to user_event_path(@user, @event)
     end
-    redirect_to user_event_path(@user, @event)
+
   end
 
   def show
@@ -54,6 +54,6 @@ class LocationsController < ApplicationController
   private
 
   def location_params
-    params.require(:location).permit(:name, :search, :name, :street, :state, :city)
+    params.require(:location).permit(:name, :street, :state, :city, :lodging)
   end
 end
