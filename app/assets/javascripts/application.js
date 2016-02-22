@@ -16,7 +16,6 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require underscore
-//= require gmaps/google
 //= require_tree .
 
 var map;
@@ -42,7 +41,6 @@ function initMap(locations) {
     address.push(location.longitude);
     markers.push(address);
   });
-  console.log(markers)
 
   for (var i = 0; i < markers.length; i++ ) {
        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
