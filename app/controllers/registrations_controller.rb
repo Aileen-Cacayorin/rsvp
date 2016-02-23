@@ -8,6 +8,8 @@ class RegistrationsController < Devise::RegistrationsController
        @guest.event = @event
        @guest.user = resource
        @guest.save
+     elsif params[:event_id] !="" && !resource.save
+       params[:event] = params[:event_id]
      end
    end
  end
