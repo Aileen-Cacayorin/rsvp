@@ -34,6 +34,9 @@ function autoComplete() {
               document.getElementById('state').value = place.address_components[3].short_name;
             });
   }
+  $('#search-text-field').keydown(function (e) {
+    if (e.which == 13 && $('.pac-container:visible').length) return false;
+  });
 </script>
 
   <script  src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=drawing,places&callback=autoComplete"></script>

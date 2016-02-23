@@ -34,6 +34,7 @@ class EventsController < ApplicationController
     @start = @event.start_date.to_date.strftime("%m/%d/%Y")
     @end = @event.end_date.to_date.strftime("%m/%d/%Y")
     @locations = @event.locations
+    @all_locations = @locations.to_json
     @guests = []
     @event.guests.each do |guest|
       if guest.user
@@ -61,11 +62,6 @@ class EventsController < ApplicationController
           end
         end
       end
-    end
-    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-      marker.infowindow location.name
-      marker.lat location.latitude
-      marker.lng location.longitude
     end
   end
 
