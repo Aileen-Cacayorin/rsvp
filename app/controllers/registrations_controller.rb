@@ -1,16 +1,15 @@
 class RegistrationsController < Devise::RegistrationsController
  def create
    super do |resource|
-     if resource.save
-       if params[:event_id] !=""
-
-         @event_id = params[:event_id]
-         @event = Event.find(@event_id.to_i)
-         @guest = Guest.new
-         @guest.event = @event
-         @guest.user = resource
-         @guest.save
-       end
+     if resource.save && params[:event_id] !=""
+       @event_id = params[:event_id]
+       @event = Event.find(@event_id.to_i)
+       @guest = Guest.new
+       @guest.event = @event
+       @guest.user = resource
+       @guest.save
+     elsif params[:event_id] !="" && !resource.save
+       params[:event] = params[:event_id]
      end
    end
  end
