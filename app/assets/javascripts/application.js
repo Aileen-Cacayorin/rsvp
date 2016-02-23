@@ -26,7 +26,6 @@ function initMap(locations) {
   locations = locations.replace(/&quot;/g, '"');
   new_locations = JSON.parse(locations);
   main_location = new_locations[0]
-
   var bounds;
   bounds = new google.maps.LatLngBounds();
   map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -39,8 +38,18 @@ function initMap(locations) {
     address.push(location.name),
     address.push(location.latitude);
     address.push(location.longitude);
+    address.push(location.street + ", " + location.city + ", " + location.state)
     markers.push(address);
   });
+
+  // Info Window Content
+  var infoWindowContent =[]
+  for (var i = 0; i < markers.length; i++) {
+    infoWindowContent.push(['<div class="info_content">' + '<h5>' + markers[i][0] + '</h5>' + markers[i][3] + '</div>'])
+  };
+
+  // Display multiple markers on a map
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
 
   for (var i = 0; i < markers.length; i++ ) {
        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
@@ -51,6 +60,12 @@ function initMap(locations) {
            title: markers[i][0]
 
        });
+       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
      }
   map.fitBounds(bounds);
 
