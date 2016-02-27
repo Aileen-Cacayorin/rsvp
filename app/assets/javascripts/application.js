@@ -68,5 +68,26 @@ function initMap(locations) {
         })(marker, i));
      }
   map.fitBounds(bounds);
-
 }
+
+function autoComplete() {
+  var input = document.getElementById('search-text-field');
+  var options = {
+          types: ['establishment'],
+          componentRestrictions: {country: 'us'}
+        };
+  var autocomplete = new google.maps.places.Autocomplete(input, options);
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  google.maps.event.addListener(autocomplete, 'place_changed', function () {
+              var place = autocomplete.getPlace();
+              var street = place.address_components[0].long_name + " " + place.address_components[1].long_name
+              document.getElementById('name').value = place.name;
+              document.getElementById('address').value = street;
+              document.getElementById('city').value = place.address_components[2].long_name;
+              document.getElementById('state').value = place.address_components[3].short_name;
+            });
+  }
+  $('#search-text-field').keydown(function (e) {
+    if (e.which == 13 && $('.pac-container:visible').length) return false;
+  });

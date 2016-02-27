@@ -20,7 +20,7 @@
         <ul class="list-group">
         <% if @attending.any? %>
           <% @attending.each do |event| %>
-            <li class="list-group-item"><%=link_to event.title, user_event_path(event.user, event) %></li>
+            <li class="list-group-item"><%=link_to event.title, user_event_path(event.user, event), data: { no_turbolink: true } %></li>
           <% end %>
         <% else %>
           <li class="list-group-item">I'm not invited to any events yet!</li>
