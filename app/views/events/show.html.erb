@@ -85,23 +85,14 @@
       <% end %>
 
     <div class="add-guest">
-      <% if @user == @event.user %>
-        <h3 class="text-center">Add Guest</h3>
-        <div class="text-center">
-          <%= form_tag invite_guest_path do %>
-            <div class="row">
-              <div class="form-group col-md-6">
-                <%= text_field_tag 'name', nil, placeholder: 'Guest Name', class: 'form-control' %>
-              </div>
-              <div class="form-group col-md-6">
-                <%= email_field_tag 'email', nil, placeholder: 'Guest Email', class: 'form-control' %>
-              </div>
-              <%=hidden_field_tag :event_id, params[:id] %>
-              <%= submit_tag "Invite Guest", class: 'btn btn-default' %>
-            </div>
-          <% end %>
-        </div>
+      <%= form_tag user_event_path(@event.user, @event), :method => 'get', id: "users_search", remote: true do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search" %>
+
       <% end %>
+      <div id="users">
+      
+      </div>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { large: "800x600#", medium: "300x200#", thumb: "100x100#" }, default_url: "/assets/images/missing.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  has_many :events, dependent: :destroy 
+  has_many :events, dependent: :destroy
   has_many :guests
 
   validates :first_name, :presence => true
@@ -42,4 +42,21 @@ class User < ActiveRecord::Base
       return false
     end
   end
+
+  def full_name
+    return self.first_name + ' ' + self.last_name
+  end
+
+
+  #searches for guest by either name or email
+  def self.search(search)
+    if search != nil
+      User.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      []
+    end
+
+  end
+
+
 end

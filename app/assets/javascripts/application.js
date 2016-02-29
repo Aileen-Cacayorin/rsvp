@@ -91,3 +91,12 @@ function autoComplete() {
   $('#search-text-field').keydown(function (e) {
     if (e.which == 13 && $('.pac-container:visible').length) return false;
   });
+
+
+  $(function() {
+
+  $("#users_search input").keyup(function() {
+    $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+    return false;
+  });
+});

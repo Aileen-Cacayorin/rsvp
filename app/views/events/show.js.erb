@@ -1,0 +1,5 @@
+<% if @users == [] %>
+  $('#users').html("<%= j render 'guest_form' %>");
+<% else %>
+  $('#users').html('<%= j render @users %>');
+<% end %>

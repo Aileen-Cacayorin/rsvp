@@ -1,0 +1,17 @@
+<% if @user == @event.user %>
+  <h3 class="text-center">Add Guest</h3>
+  <div class="text-center">
+    <%= form_tag invite_guest_path do %>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <%= text_field_tag 'name', nil, placeholder: 'Guest Name', class: 'form-control' %>
+        </div>
+        <div class="form-group col-md-6">
+          <%= email_field_tag 'email', nil, placeholder: 'Guest Email', class: 'form-control' %>
+        </div>
+        <%=hidden_field_tag :event_id, params[:id] %>
+        <%= submit_tag "Invite Guest", class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -30,6 +30,7 @@ class EventsController < ApplicationController
   def show
     require 'httparty'
     @user = current_user
+    @users = User.search(params[:search])
     @event = Event.find(params[:id])
     @start = @event.start_date.to_date.strftime("%m/%d/%Y")
     @end = @event.end_date.to_date.strftime("%m/%d/%Y")
@@ -62,6 +63,11 @@ class EventsController < ApplicationController
           end
         end
       end
+    end
+    respond_to do |format|
+    # format.html { redirect_to user_event_path(@event.user, @event)}
+    format.html
+    format.js
     end
   end
 
